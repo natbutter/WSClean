@@ -17,7 +17,7 @@ WORKDIR /workdir
 
 RUN git clone https://gitlab.com/aroffringa/wsclean.git && \
 cd wsclean && \
-git checkout -b 923fd2baf598ffe488fb521b955f6eed3cc080 && \
+git checkout -b trial 923fd2baf598ffe488fb521b955f6eed3cc080 && \
 mkdir build && cd build && \ 
 cmake ../ && \
 make && \
