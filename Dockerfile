@@ -1,9 +1,12 @@
-
+#Based on the documentation, ubuntu looks "easy" to build with 
+#https://sourceforge.net/p/wsclean/wiki/Installation/
 FROM ubuntu:20.04
 
+#tzdata wants to throw up an interactive message requesting input,so just specify your timezone here instead and it wont.
 ENV TZ 'UTC'
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
+#Install dependencies (plus a few missing from the documentation)
 RUN apt-get -y update && \ 
 apt-get -y install casacore-dev libgsl-dev libhdf5-dev libfftw3-dev libboost-dev python3-dev \
 libboost-date-time-dev libboost-filesystem-dev libboost-program-options-dev \
@@ -13,6 +16,7 @@ openmpi-bin libopenmpi-dev python3-dev python3-pybind11 python3-pip doxygen libl
 && apt-get autoremove \
 && apt-get clean
 
+#Now install a specific version of wsclean
 WORKDIR /workdir
 
 RUN git clone https://gitlab.com/aroffringa/wsclean.git && \
